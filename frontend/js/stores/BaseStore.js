@@ -30,7 +30,7 @@ class BaseStore extends EventEmitter {
   }
 
   delete(id) {
-    this._items.splice(id, 1);
+    this._items = this._items.filter(item => item.id !== id);
   }
 
   addChangeListener(cb) {

@@ -4,6 +4,7 @@ import React, {Component, PropTypes} from "react";
 import Comments from "../Comments/";
 import HOCtoggle from "../../HOC/toggleArticle/";
 import HOChint from "../../HOC/hintArticle/";
+import { deleteArticle } from "../../actions/articles";
 
 class Article extends Component {
 
@@ -28,8 +29,18 @@ class Article extends Component {
     </h2>
   }
 
+  deleteHandler() {
+    return e => {
+      e.preventDefault();
+      deleteArticle(this.props.article.id);
+    };
+  }
+
   getBody() {
-    return <p>{this.props.article.body}</p>;
+    return <div>
+        <p><a href="#" onClick={this.deleteHandler()}>delete article</a></p>
+        <p>{this.props.article.body}</p>
+      </div>;
   }
 
   getComments() {
