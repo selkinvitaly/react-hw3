@@ -1,8 +1,9 @@
 "use strict";
 
 import React, {Component, PropTypes} from "react";
+import Comment from "../Comment/";
 
-class Comments extends Component {
+class CommentList extends Component {
 
   constructor() {
     super();
@@ -29,11 +30,7 @@ class Comments extends Component {
   }
 
   getComments() {
-    return this.props.comments.map(comment =>
-      <li key={comment.id}>
-        {comment.text}
-      </li>
-    );
+    return this.props.comments.map(comment => <Comment key={comment.id} text={comment.text} />);
   }
 
   getForm() {
@@ -80,8 +77,8 @@ class Comments extends Component {
 
 }
 
-Comments.propTypes = {
+CommentList.propTypes = {
   comments: PropTypes.array
 };
 
-export default Comments;
+export default CommentList;

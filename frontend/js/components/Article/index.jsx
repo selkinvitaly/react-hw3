@@ -1,7 +1,7 @@
 "use strict";
 
 import React, {Component, PropTypes} from "react";
-import Comments from "../Comments/";
+import CommentList from "../CommentList/";
 import HOCtoggle from "../../HOC/toggleArticle/";
 import HOChint from "../../HOC/hintArticle/";
 import { deleteArticle } from "../../actions/articles";
@@ -44,7 +44,7 @@ class Article extends Component {
   }
 
   getComments() {
-    return <Comments comments={this.props.article.getRelation("comments")} />;
+    return <CommentList comments={this.props.article.getRelation("comments")} />;
   }
 
   render() {
