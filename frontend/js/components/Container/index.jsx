@@ -15,6 +15,7 @@ class Container extends Component {
   }
 
   componentDidMount() {
+    //запись в this совсем плохо, и не понятно зачем
     this._changeHandler = () => this.change();
     articlesStore.addChangeListener(this._changeHandler);
   }
