@@ -17,7 +17,7 @@ class CommentStore extends BaseStore {
 
           let nextId  = this.getNextIndex();
           let article = this.getArticleByArticleId(data.articleId);
-
+          //нельзя изменять данные чужого стора
           article.comments = article.comments || [];
           article.comments.push(nextId);
 
@@ -30,11 +30,11 @@ class CommentStore extends BaseStore {
       }
     });
   }
-
+//Плохо привязыватсья к порядку, не факт что большый id в конце
   getNextIndex() {
     return this._items[this._items.length - 1].id + 1;
   }
-
+  //у article стора и так есть метод getById, зачем это?
   getArticleByArticleId(articleId) {
     let store = this._stores.articles;
 
