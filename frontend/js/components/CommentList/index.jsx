@@ -2,6 +2,7 @@
 
 import React, {Component, PropTypes} from "react";
 import Comment from "../Comment/";
+import { addComment } from "../../actions/comments";
 
 class CommentList extends Component {
 
@@ -25,8 +26,19 @@ class CommentList extends Component {
     });
   }
 
+  addCommentHandler() {
+    return e => {
+      e.preventDefault();
+      addComment(this.props.articleId, this.refs["input"].value || "");
+    };
+  }
+
   getShowedStyle() {
     return this.state.showed ? null : { display: "none" };
+  }
+
+  getEmptyStyle() {
+    return { display: !this.props.comments.length ? "none" : "block" }
   }
 
   getComments() {
@@ -56,29 +68,27 @@ class CommentList extends Component {
       backgroundColor: "#2385b5"
     };
 
-    return <form>
-      <input style={inputStyles} type="text" placeholder="Enter your comment" />
+    return <form onSubmit={this.addCommentHandler()}>
+      <input ref="input" style={inputStyles} type="text" placeholder="Enter your comment" />
       <input style={submitStyles} type="submit" value="Submit" />
     </form>;
   }
 
   render() {
-    return !this.props.comments.length ? null :
-      <div>
-        <p><a onClick={this.toggleHandler()} href="#">show comments</a></p>
-        <div style={this.getShowedStyle()}>
-          <ul>
-            {this.getComments()}
-          </ul>
-          {this.getForm()}
-        </div>
-      </div>
+    return <div>
+      <p style={this.getEmptyStyle()}><a onClick={this.toggleHandler()} href="#">show comments</a></p>
+      <ul style={this.getShowedStyle()}>
+        {this.getComments()}
+      </ul>
+      {this.getForm()}
+    </div>
   }
 
 }
 
 CommentList.propTypes = {
-  comments: PropTypes.array
+  comments: PropTypes.array,
+  articleId: PropTypes.number
 };
 
 export default CommentList;

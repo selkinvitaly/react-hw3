@@ -44,7 +44,7 @@ class Article extends Component {
   }
 
   getComments() {
-    return <CommentList comments={this.props.article.getRelation("comments")} />;
+    return <CommentList articleId={this.props.article.id} comments={this.props.article.getRelation("comments")} />;
   }
 
   render() {
